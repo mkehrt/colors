@@ -1,0 +1,4 @@
+colors
+======
+
+Color palette generator.
