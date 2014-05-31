@@ -6,14 +6,13 @@
 #include <string>
 #include <vector>
 
-class xyYtoRGB {
   /*
    * XYZ to sRGB conversion matrix
    */
-  static constexpr double Mi[3][3]  = {{ 3.2406, -1.5372, -0.4986},
-                                   {-0.9689,  1.8758,  0.0415},
+static const double Mi[3][3]  = {{ 3.2406, -1.5372, -0.4986},
+                            {-0.9689,  1.8758,  0.0415},
                                    { 0.0557, -0.2040,  1.0570}};
-
+class xyYtoRGB {
   
   static std::vector<int> XYZtoRGB(double X, double Y, double Z) {
     std::vector<int>result (3);
@@ -148,22 +147,22 @@ struct Munsell {
   static std::string toJson(Map<Colorspace::RGB, int>::Type m)
   {
    std::stringstream ss;
-   ss << "{ ";
+   ss << "{";
    for (auto hp : m) {
-    ss << "{ " << "\"" << hp.first << "\" : ";
+    ss << "{" << "\"" << hp.first << "\":";
     for (auto vp : hp.second) {
-      ss << "{ " << "\"" << hp.first << "\" : ";
+      ss << "{" << "\"" << vp.first << "\":";
       for (auto cp : vp.second) {
-        ss << "{ " << "\"" << cp.first << "\" : ";
+        ss << "{" << "\"" << cp.first << "\":";
 
         auto t = cp.second;
-        ss << "{ " << "\"r : \"" << t.p1 << ", \"g : \"" << t.p2 << ", \"b : \"" << t.p3 << " }";
+        ss << "{" << "\"r\":" << t.p1 << ",\"g\":" << t.p2 << ",\"b\":" << t.p3 << "}";
       }
-      ss << " }, ";
+      ss << "},";
     }
-    ss << " }, ";
+    ss << "},";
   }
-  ss << " }";
+  ss << "}";
 
   return ss.str();
   }
